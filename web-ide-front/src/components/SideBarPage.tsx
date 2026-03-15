@@ -1,17 +1,18 @@
-import { Text } from "@chakra-ui/react";
 
-interface SideBarPageProps{
+interface SideBarPageProps {
 
-    pageName:string
+  pageName: string
 }
 
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import 'react-perfect-scrollbar/dist/css/styles.css'
+import FileExplorer from "./FileExplorer";
+import { Text } from '@chakra-ui/react';
 
 export default function SideBarPage({ pageName }: SideBarPageProps) {
   return (
     <PerfectScrollbar style={{ height: '100%' }}>
-      <Text>{pageName}</Text>
+      {pageName === "File Explorer" ? <FileExplorer /> : <Text>Search</Text>}
     </PerfectScrollbar>
   )
 }

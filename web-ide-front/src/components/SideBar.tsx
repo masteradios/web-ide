@@ -25,7 +25,7 @@ export default function SideBar() {
         <Grid gap={8} padding={3}>
             {pages.map((page) => (<>
 
-                <GridItem cursor={"pointer"} onClick={() => {
+                <GridItem key={page} cursor={"pointer"} onClick={() => {
                     onClick(page)
                 }}>
                     <Icon color={selectedPage===page?"white":"gray.400"} size="lg" _hover={{ color: "white" }}> {iconMap[page]}</Icon>

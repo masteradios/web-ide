@@ -8,9 +8,11 @@ import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from './store/store';
 //import { Provider } from 'react-redux'
 import { Provider } from "@/components/ui/provider"
-import { setActiveFile } from "./slices/currentActiveFile";
+import { setActiveNode } from "./slices/currentActiveFileSlice";
 import { loader } from '@monaco-editor/react';
 import MonacoEditor from './components/MonacoEditor';
+import { dummyNodes } from './constants/Constants';
+import type { INode } from './types/Node';
 
 
 loader.init().then((monaco) => {
@@ -33,25 +35,12 @@ function App() {
 
 
   const dispatch = useDispatch();
-  const files: Record<string, { name: string; language: string; value: string }> = {
-  "script.js": {
-    name: "script.js",
-    language: "javascript",
-    value: `console.log("Hello World");`
-  },
-  "style.css": {
-    name: "style.css",
-    language: "css",
-    value: `body {\n  margin: 0;\n  font-family: sans-serif;\n}`
-  },
-  "index.html": {
-    name: "index.html",
-    language: "html",
-    value: `<!DOCTYPE html>\n<html>\n  <head>\n    <link rel="stylesheet" href="style.css" />\n  </head>\n  <body>\n    <script src="script.js"></script>\n  </body>\n</html>`
-  }
-}
-  const fileName = useSelector((state: RootState) => state.activeFile.activeFile)
-  const file = files[fileName];
+
+
+const activeNode = useSelector((state: RootState) => state.activeFile.activeNode)
+
+  const nodeList = useSelector((state: RootState) => state.nodeSlice.nodeList)
+  const file =activeNode&&   activeNode.isFile ? nodeList.find((node) => node.uri === activeNode.uri) : undefined;
   const editorRef = useRef<any>(null);
   const cursorPositions = useRef<Record<string, any>>({});
 
@@ -62,17 +51,19 @@ function App() {
 
   // restore cursor after file switch
   useEffect(() => {
-    if (editorRef.current && cursorPositions.current[fileName]) {
-      editorRef.current.setPosition(cursorPositions.current[fileName]);
+    if (editorRef.current && cursorPositions.current[activeNode.name]) {
+      editorRef.current.setPosition(cursorPositions.current[activeNode.name]);
       editorRef.current.focus();
     }
-  }, [fileName]);
-  const switchFile = (newFileName: string) => {
+  }, [activeNode]);
+
+  const switchNode = (newNode: INode) => {
     // save current cursor before switching
     if (editorRef.current) {
-      cursorPositions.current[fileName] = editorRef.current.getPosition();
+      cursorPositions.current[activeNode.name] = editorRef.current.getPosition();
     }
-    dispatch(setActiveFile(newFileName));
+
+    dispatch(setActiveNode(newNode));
   }
 
   return (
@@ -90,21 +81,21 @@ function App() {
 
         <GridItem height="full" display="flex" flexDirection="column" minWidth="0" overflow="hidden">
           <Box width="100%" display="flex" overflowX="auto" whiteSpace="nowrap" borderY="1px solid rgba(128,128,128,0.4)">
-            {
-            
-            
-            Object.entries(files).map(([key]) => (
-              <Box minWidth="120px" cursor="pointer" key={key} onClick={() => switchFile(key)}>
-                <TaskBarItem itemName={key} isActive={fileName === key} />
-              </Box>
-            ))}
+            {dummyNodes.map((node) =>
+              node.isFile ? (
+                <Box minWidth="120px" cursor="pointer" key={node.uri} onClick={() => switchNode(node)}>
+                  <TaskBarItem itemName={node.name} isActive={activeNode.name === node.name} />
+                </Box>
+              ) : null
+            )}
           </Box>
+
           <Box flex="1" overflow="hidden">
-            <MonacoEditor handleEditorMount={handleEditorMount } file= {file} ></MonacoEditor>
+            {file && <MonacoEditor handleEditorMount={handleEditorMount} file={file} ></MonacoEditor>}
           </Box>
         </GridItem>
       </Grid>
-    </Provider>
+    </Provider >
 
   )
 }

@@ -1,15 +1,12 @@
+import type { INode } from "@/types/Node";
 import { Editor } from "@monaco-editor/react";
 interface MonacoEditorProps {
 
-    handleEditorMount:(editor:any)=>void,
-    file :{
-        name :string,
-        language: string,
-        value :string
-    }
+    handleEditorMount: (editor: any) => void,
+    file?: INode
 
 }
-export default function MonacoEditor({handleEditorMount,file}:MonacoEditorProps) {
+export default function MonacoEditor({ handleEditorMount, file }: MonacoEditorProps) {
     // return (<>
 
     //     <Editor
@@ -39,8 +36,23 @@ export default function MonacoEditor({handleEditorMount,file}:MonacoEditorProps)
 
     // </>)
 
+    const index = file!.name.lastIndexOf(".");
+    const extension = file!.name.substring(index);
+    var language: string;
+    switch (extension) {
 
-
+        case "jsx":
+            language = "javascript"
+            break;
+        case "tsx":
+            language = "typescript"
+            break;
+        case ".html":
+            language = "html"
+            break;
+        default:
+            language = "javascript"
+    }
 
     return (
         <>
@@ -51,11 +63,11 @@ export default function MonacoEditor({handleEditorMount,file}:MonacoEditorProps)
                 height="100%"
                 width="100%"
                 theme="myTheme"
-                path={file.name}
-                defaultLanguage={file.language}
-                defaultValue={file.value}
+                path={file!.name}
+                defaultLanguage={language}
+                defaultValue={""}
                 options={{
-   
+
                     overviewRulerBorder: false,
                     overviewRulerLanes: 0,
                     quickSuggestions: true,
