@@ -8,10 +8,9 @@ import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from './store/store';
 //import { Provider } from 'react-redux'
 import { Provider } from "@/components/ui/provider"
-import { setActiveNode } from "./slices/currentActiveFileSlice";
+import { setActiveNode } from "./slices/currentActiveNodeSlice";
 import { loader } from '@monaco-editor/react';
 import MonacoEditor from './components/MonacoEditor';
-import { dummyNodes } from './constants/Constants';
 import type { INode } from './types/Node';
 
 
@@ -40,7 +39,7 @@ function App() {
 const activeNode = useSelector((state: RootState) => state.activeFile.activeNode)
 
   const nodeList = useSelector((state: RootState) => state.nodeSlice.nodeList)
-  const file =activeNode&&   activeNode.isFile ? nodeList.find((node) => node.uri === activeNode.uri) : undefined;
+  const file =activeNode&&   activeNode.isFile ? activeNode: undefined;
   const editorRef = useRef<any>(null);
   const cursorPositions = useRef<Record<string, any>>({});
 
@@ -81,10 +80,10 @@ const activeNode = useSelector((state: RootState) => state.activeFile.activeNode
 
         <GridItem height="full" display="flex" flexDirection="column" minWidth="0" overflow="hidden">
           <Box width="100%" display="flex" overflowX="auto" whiteSpace="nowrap" borderY="1px solid rgba(128,128,128,0.4)">
-            {dummyNodes.map((node) =>
+            {nodeList.map((node) =>
               node.isFile ? (
                 <Box minWidth="120px" cursor="pointer" key={node.uri} onClick={() => switchNode(node)}>
-                  <TaskBarItem itemName={node.name} isActive={activeNode.name === node.name} />
+                  <TaskBarItem node={node} isActive={activeNode.uri === node.uri} />
                 </Box>
               ) : null
             )}

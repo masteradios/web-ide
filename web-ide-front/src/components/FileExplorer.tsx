@@ -6,7 +6,7 @@ import NodeComponent from "./NodeComponent";
 export default function FileExplorer() {
 
         const nodeList = useSelector((state: RootState) => state.nodeSlice.nodeList)
-        const root=nodeList.find((node) => node.uri =="root");
+        const root=nodeList.find((node) => node.uri =="/root");
 
     return (
         <Box textAlign={"start"} width={"100%"} paddingTop={"1"} paddingLeft={"3"} >

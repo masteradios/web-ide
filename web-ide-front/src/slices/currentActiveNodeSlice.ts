@@ -6,7 +6,7 @@ interface currentActiveNodeState {
     activeNode:INode
 }
 const initialState :currentActiveNodeState={
-activeNode:dummyNodes[0]
+activeNode:dummyNodes.filter((n)=>n.parent=="/")[0]
     
 }
 

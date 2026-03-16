@@ -1,6 +1,6 @@
 import type { INode } from "@/types/Node";
 import NodeComponent from "./NodeComponent";
-import { Box, Flex } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 
 interface NodeExpandedViewProps {
     nodes: INode[]

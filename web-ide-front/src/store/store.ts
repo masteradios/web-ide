@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import selectedPageReducer from '../slices/sideBarPageSlice';
-import  activeFileReducer  from "../slices/currentActiveFileSlice";
+import  activeFileReducer  from "../slices/currentActiveNodeSlice";
 import nodeSliceReducer from "../slices/nodeListSlice";
 export const store= configureStore({
 reducer:{

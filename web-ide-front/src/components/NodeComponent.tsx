@@ -1,4 +1,4 @@
-import { setActiveNode } from "@/slices/currentActiveFileSlice";
+import { setActiveNode } from "@/slices/currentActiveNodeSlice";
 import { toggleExpanded } from "@/slices/nodeListSlice";
 import type { RootState } from "@/store/store";
 import type { INode } from "@/types/Node"
@@ -36,10 +36,10 @@ export default function NodeComponent({ node,depth }: NodeComponentProps) {
     useEffect(() => { }, [])
     const nodeList = useSelector((state: RootState) => state.nodeSlice.nodeList)
 
-    const children = nodeList.filter(n => n.parent === "/" + node.uri)
+    const children = nodeList.filter(n => n.parent ===node.uri)
     return (
         <>
-            <Flex onClick={onClick} borderWidth="1px"
+            <Flex width={"full"} onClick={onClick} borderWidth="1px"
                 bgColor={activeNode && node.uri === activeNode.uri ? "gray.600" : "transparent"}
                 borderColor={activeNode && node.uri === activeNode.uri ? "blue.400" : "transparent"} _hover={{ bgColor: "gray.600" }} direction={"row"} align={"center"}>
 
