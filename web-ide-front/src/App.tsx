@@ -79,10 +79,10 @@ const activeNode = useSelector((state: RootState) => state.activeFile.activeNode
 
 
         <GridItem height="full" display="flex" flexDirection="column" minWidth="0" overflow="hidden">
-          <Box width="100%" display="flex" overflowX="auto" whiteSpace="nowrap" borderY="1px solid rgba(128,128,128,0.4)">
+          <Box className='tab-scrollbar' width="100%" display="flex" overflowX="auto" whiteSpace="nowrap" borderY="1px solid rgba(128,128,128,0.4)">
             {nodeList.map((node) =>
               node.isFile ? (
-                <Box minWidth="120px" cursor="pointer" key={node.uri} onClick={() => switchNode(node)}>
+                <Box  width={"fit-content"} cursor="pointer" key={node.uri} onClick={() => switchNode(node)}>
                   <TaskBarItem node={node} isActive={activeNode.uri === node.uri} />
                 </Box>
               ) : null

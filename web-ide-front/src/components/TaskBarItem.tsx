@@ -33,10 +33,10 @@ export default function TaskBarItem({ node, isActive }: TaskBarItemProps) {
     }
     return (
         <>
-            <Box onClick={onClick} padding={3} borderTop={isActive ? "1px solid blue" : borderStyle}
+            <Box  onClick={onClick} padding={3} borderTop={isActive ? "1px solid blue" : borderStyle}
                 borderX={borderStyle}>
 
-                <Text width="fit-content" color="white" opacity={isActive ? "1" : "0.5"}>
+                <Text fontSize={"sm"} width="fit-content" color="white" opacity={isActive ? "1" : "0.5"}>
                     {node.name}
                 </Text>
             </Box>

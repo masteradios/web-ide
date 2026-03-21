@@ -6,6 +6,7 @@ import { ContextMenu } from "./ContextMenu";
 import { useContextMenu } from "@/hooks/useContextMenu";
 import type { INode } from "@/types/Node";
 import { useState } from "react";
+import { menuDataforFile, menuDataforFolder } from "@/constants/Constants";
 
 export default function FileExplorer() {
 
@@ -22,8 +23,8 @@ export default function FileExplorer() {
 
                 Explorer
             </Text>
-            {(clicked && activeContextNode && !activeContextNode.isFile) ? (
-                <ContextMenu node={activeContextNode} top={coords.y} left={coords.x} onClose={() => setClicked(false)} />
+            {(clicked && activeContextNode ) ? (
+                <ContextMenu menuItems={activeContextNode.isFile?menuDataforFile:menuDataforFolder} node={activeContextNode} top={coords.y} left={coords.x} onClose={() => setClicked(false)} />
             ) : <></>}
             <NodeComponent depth={0} node={root!}
                 setActiveContextNode={setActiveContextNode}

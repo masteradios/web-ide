@@ -189,3 +189,21 @@ html, body, #root {
     border-right-color: var(--border);
   }
 }
+
+/* App.css */
+.tab-scrollbar::-webkit-scrollbar {
+  height: 5px;  /* thin horizontal scrollbar */
+}
+
+.tab-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.tab-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(128, 128, 128, 0.4);
+  border-radius: 10px;
+}
+
+.tab-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(128, 128, 128, 0.8);
+}

@@ -16,7 +16,6 @@ import {
   SiGo,
   SiHaskell,
   SiHtml5,
-  SiJson,
   SiKotlin,
   SiLua,
   SiMarkdown,
@@ -27,7 +26,7 @@ import {
   SiSass,
   SiSwift
 } from 'react-icons/si';
-import {  FaJava, FaNodeJs } from 'react-icons/fa';
+import {  FaNodeJs } from 'react-icons/fa';
 import type React from 'react';
 import { VscJson } from 'react-icons/vsc';
 import { GrDocumentTxt } from 'react-icons/gr';

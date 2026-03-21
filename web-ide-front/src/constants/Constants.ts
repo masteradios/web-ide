@@ -21,17 +21,14 @@
 
 
 
-export const menuData = [
-    {
-        id: 1,
-        name: 'Add a file'
-    },
-    {
-        id: 2,
-        name: 'Add a folder'
-    },
-    {
-        id: 3,
-        name: 'Remove a file'
-    }
+export const menuDataforFolder = [
+    { id: 1, name: 'Add new file', action: 'ADD_FILE' },
+    { id: 2, name: 'Add a folder', action: 'ADD_FOLDER' },
+    { id: 3, name: 'Remove folder and its content', action: 'REMOVE_NODE' },
+     { id: 4, name: 'Rename Folder', action: 'RENAME_FOLDER' }
+]
+
+export const menuDataforFile = [
+    { id: 1, name: 'Rename File', action: 'RENAME_FILE' },
+    { id: 2, name: 'Remove File', action: 'REMOVE_NODE' }
 ]
