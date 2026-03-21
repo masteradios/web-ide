@@ -63,7 +63,7 @@ export default function MonacoEditor({ handleEditorMount, file }: MonacoEditorPr
                 height="100%"
                 width="100%"
                 theme="myTheme"
-                path={file!.name}
+                path={file!.uri}
                 defaultLanguage={language}
                 defaultValue={""}
                 options={{

@@ -18,3 +18,20 @@
   { name: "package.json", isFile: true, uri: "/root/package.json", isExpanded: false, isSelected: false, parent: "/root" },
   { name: ".gitignore", isFile: true, uri: "/root/.gitignore", isExpanded: false, isSelected: false, parent: "/root" },
 ]
+
+
+
+export const menuData = [
+    {
+        id: 1,
+        name: 'Add a file'
+    },
+    {
+        id: 2,
+        name: 'Add a folder'
+    },
+    {
+        id: 3,
+        name: 'Remove a file'
+    }
+]

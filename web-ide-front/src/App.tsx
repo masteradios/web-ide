@@ -73,7 +73,7 @@ const activeNode = useSelector((state: RootState) => state.activeFile.activeNode
 
         </GridItem>
 
-        <GridItem borderRight={fileExplorerBorder} borderTop="1px solid rgba(128,128,128,0.4)" height="full" overflow="hidden">
+        <GridItem width={"100%"} borderRight={fileExplorerBorder} borderTop="1px solid rgba(128,128,128,0.4)" height="full" overflow="hidden">
           {selectedPage === "" ? <></> : <SideBarPage pageName={selectedPage}></SideBarPage>}
         </GridItem>
 
