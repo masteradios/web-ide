@@ -7,14 +7,15 @@ interface NodeExpandedViewProps {
     depth: number,
     setActiveContextNode: (node: INode) => void,
     setCoords: (coords: { x: number, y: number }) => void,
-    setClicked: (v: boolean) => void
+    setClicked: (v: boolean) => void,
+    activeContextNode : INode | null
 }
 
-export default function NodeExpandedView({ nodes, depth = 0, setActiveContextNode,setClicked,setCoords }: NodeExpandedViewProps) {
+export default function NodeExpandedView({ nodes, depth = 0, setActiveContextNode,activeContextNode,setClicked,setCoords }: NodeExpandedViewProps) {
     return (<>
         {nodes.map((node) =>
             <Box key={node.uri} >
-                <NodeComponent node={node} depth={depth} setActiveContextNode={setActiveContextNode} setCoords={setCoords} setClicked={setClicked} />
+                <NodeComponent activeContextNode={activeContextNode} node={node} depth={depth} setActiveContextNode={setActiveContextNode} setCoords={setCoords} setClicked={setClicked} />
             </Box>
         )}
     </>);

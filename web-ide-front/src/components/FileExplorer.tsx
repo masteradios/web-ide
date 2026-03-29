@@ -4,16 +4,13 @@ import { useSelector } from "react-redux";
 import NodeComponent from "./NodeComponent";
 import { ContextMenu } from "./ContextMenu";
 import { useContextMenu } from "@/hooks/useContextMenu";
-import type { INode } from "@/types/Node";
-import { useState } from "react";
 import { menuDataforFile, menuDataforFolder } from "@/constants/Constants";
 
 export default function FileExplorer() {
 
     const nodeList = useSelector((state: RootState) => state.nodeSlice.nodeList)
-    const root = nodeList.find((node) => node.uri == "/root");
-    const { clicked, setClicked, coords, setCoords } = useContextMenu()
-    const [activeContextNode, setActiveContextNode] = useState<INode | null>(null)
+    const root = nodeList.find((node) => node.uri == "root");
+    const { clicked, setClicked, coords, setCoords ,activeContextNode,setActiveContextNode} = useContextMenu()
 
 
 
@@ -24,10 +21,14 @@ export default function FileExplorer() {
                 Explorer
             </Text>
             {(clicked && activeContextNode ) ? (
-                <ContextMenu menuItems={activeContextNode.isFile?menuDataforFile:menuDataforFolder} node={activeContextNode} top={coords.y} left={coords.x} onClose={() => setClicked(false)} />
+                <ContextMenu menuItems={activeContextNode.isFile?menuDataforFile:menuDataforFolder} node={activeContextNode} top={coords.y} left={coords.x} onClose={() => {
+                    setClicked(false);
+                    setActiveContextNode(null);
+                }} />
             ) : <></>}
             <NodeComponent depth={0} node={root!}
                 setActiveContextNode={setActiveContextNode}
+                activeContextNode={activeContextNode}
                 setCoords={setCoords}
                 setClicked={setClicked}
             />

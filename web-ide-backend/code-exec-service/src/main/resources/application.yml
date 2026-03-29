@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: code-exec-service
+
+server :
+  port : 4001
+
+ROOT_PATH : ${ROOT_PATH}
+SECRET_ENCRYPTION_KEY : ${SECRET_ENCRYPTION_KEY}

@@ -16,9 +16,10 @@ interface NodeComponentProps {
     depth: number,
     setActiveContextNode: (node: INode) => void,
     setCoords: (coords: { x: number, y: number }) => void,
-    setClicked: (v: boolean) => void
+    setClicked: (v: boolean) => void,
+    activeContextNode :INode | null
 }
-export default function NodeComponent({ node, depth, setActiveContextNode,setClicked,setCoords }: NodeComponentProps) {
+export default function NodeComponent({ node, depth, activeContextNode,setActiveContextNode,setClicked,setCoords }: NodeComponentProps) {
 
     const activeNode = useSelector((state: RootState) => state.activeFile.activeNode);
     const dispatch = useDispatch();
@@ -52,7 +53,7 @@ export default function NodeComponent({ node, depth, setActiveContextNode,setCli
     return (
         <>
             <Box onContextMenu={onContextMenu} paddingLeft={"3"} onClick={onClick} borderWidth="1px" bgColor={activeNode && node.uri === activeNode.uri ? "gray.600" : "transparent"}
-                borderColor={activeNode && node.uri === activeNode.uri ? "blue.400" : "transparent"} _hover={{ bgColor: "gray.600" }}>
+                 borderColor={activeNode && node.uri === activeNode.uri && activeContextNode ==null ? "blue.400" : (activeContextNode && node.uri ===activeContextNode.uri)?"green.300":"transparent"} _hover={{ bgColor: "gray.600" }}>
 
 
 
@@ -76,7 +77,7 @@ export default function NodeComponent({ node, depth, setActiveContextNode,setCli
                 </Flex>
             </Box>
 
-            {node.isExpanded ? <NodeExpandedView setClicked={setClicked} setCoords={setCoords} setActiveContextNode={setActiveContextNode} depth={(depth ?? 0) + 1} nodes={children}></NodeExpandedView> : null}
+            {node.isExpanded ? <NodeExpandedView activeContextNode={activeContextNode} setClicked={setClicked} setCoords={setCoords} setActiveContextNode={setActiveContextNode} depth={(depth ?? 0) + 1} nodes={children}></NodeExpandedView> : null}
 
         </>
 
